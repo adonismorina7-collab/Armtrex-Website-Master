@@ -32,6 +32,7 @@ const EMPTY = {
 
 const REQUIRED = [
   'legalEntityName',
+  'registrationNumber',
   'incorporationCountry',
   'registeredAddress',
   'businessDescription',
@@ -115,12 +116,6 @@ export default function KycForm() {
         </div>
       )}
 
-      <div className="kyc-mandatory-note">
-        <strong>Stage 1 screening:</strong> Do not upload passports, identity documents, End-User
-        Certificates or other sensitive supporting documents through this public form. If further
-        documentation is required, Armtrex will provide appropriate instructions for secure submission.
-      </div>
-
       <h3 className="kyc-section-heading">A. Organisation</h3>
 
       <div className={`field ${errors.legalEntityName ? 'has-error' : ''}`}>
@@ -129,16 +124,33 @@ export default function KycForm() {
       </div>
 
       <div className="form-row">
-        <div className="field">
-          <label htmlFor="k-trading-name">Trading Name</label>
-          <input id="k-trading-name" name="tradingName" type="text" maxLength={200} value={values.tradingName} onChange={update} />
-        </div>
-        <div className="field">
-          <label htmlFor="k-reg-number">Company / Registration Number</label>
-          <input id="k-reg-number" name="registrationNumber" type="text" maxLength={100} value={values.registrationNumber} onChange={update} />
-        </div>
-      </div>
+  <div className="field">
+    <label htmlFor="k-trading-name">Trading Name</label>
+    <input
+      id="k-trading-name"
+      name="tradingName"
+      type="text"
+      maxLength={200}
+      value={values.tradingName}
+      onChange={update}
+    />
+  </div>
 
+  <div className={`field ${errors.registrationNumber ? 'has-error' : ''}`}>
+    <label htmlFor="k-reg-number">
+      Company / Registration Number <span aria-hidden="true">*</span>
+    </label>
+    <input
+      id="k-reg-number"
+      name="registrationNumber"
+      type="text"
+      maxLength={100}
+      required
+      value={values.registrationNumber}
+      onChange={update}
+    />
+  </div>
+</div>
       <div className="form-row">
         <div className={`field ${errors.incorporationCountry ? 'has-error' : ''}`}>
           <label htmlFor="k-inc-country">Country of Incorporation <span aria-hidden="true">*</span></label>
