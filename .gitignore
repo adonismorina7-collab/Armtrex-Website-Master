@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local helper scripts & extraction intermediates
+_extract/
+
+# OS / editor
+.DS_Store
+*.log
+
+# Sensitive source material — DO NOT COMMIT
+# Company/KYC documents contain passports, banking and shareholder data.
+OIM-KYC.docx
+OIM-Company Profile.docx
+logo.docx
+
+# Raw third-party datasheet source folders (only derived product renders ship in public/)
+Artillery Ammunitioin/
+Mortar Ammuition/
+Propellant Charges/
+Unguided Rockets/
+
+# Local logo backup
+public/assets/brand/logo-light.bak.png
+web/
+web-oim-main/

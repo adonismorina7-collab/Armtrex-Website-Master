@@ -1,0 +1,26 @@
+name = "armtrex-website"
+main = "worker/index.js"
+compatibility_date = "2025-01-01"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+# Secrets (never put these here — set with `wrangler secret put <NAME>`):
+#
+#   ACCESS_TOKEN_SECRET   Required. Signs/verifies the 14-day KYC access
+#                         links. Rotating this immediately invalidates every
+#                         outstanding link.
+#
+#   One of the following two, to enable KYC email delivery:
+#     KYC_RELAY_URL + KYC_RELAY_SECRET   Forward to your own mail relay
+#                                        (e.g. server/contact_service.py's
+#                                        /api/kyc endpoint on your VPS).
+#     RESEND_API_KEY (+ RESEND_FROM, KYC_TO_EMAIL)   Send directly via the
+#                                        Resend REST API.
+#
+# Example:
+#   wrangler secret put ACCESS_TOKEN_SECRET
+#   wrangler secret put KYC_RELAY_URL
+#   wrangler secret put KYC_RELAY_SECRET
