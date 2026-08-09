@@ -6,6 +6,7 @@ const ENDPOINT = '/api/kyc'
 const EMPTY = {
   legalEntityName: '',
   tradingName: '',
+  ownershipControl: '',
   registrationNumber: '',
   incorporationCountry: '',
   registeredAddress: '',
@@ -172,7 +173,28 @@ export default function KycForm() {
         <textarea id="k-business" name="businessDescription" rows="4" maxLength={2000} required value={values.businessDescription} onChange={update} />
       </div>
 
-      <h3 className="kyc-section-heading">B. Authorised Contact</h3>
+  <h3 className="kyc-section-heading">B. Ownership &amp; Control</h3>
+
+<div className="field">
+  <label htmlFor="k-ownership-control">
+    Ownership / Control Structure
+  </label>
+  <textarea
+    id="k-ownership-control"
+    name="ownershipControl"
+    rows="4"
+    maxLength={3000}
+    value={values.ownershipControl}
+    onChange={update}
+    placeholder="Briefly describe the ownership and control structure, including any parent company or controlling entity where applicable."
+  />
+</div>
+
+<p className="form-help">
+  Please provide sufficient information to identify the organisation's
+  ownership and control. Do not submit passports, identity documents or
+  other sensitive personal information through this public form.
+</p>
 
       <div className="form-row">
         <div className={`field ${errors.contactName ? 'has-error' : ''}`}>

@@ -63,9 +63,14 @@ function bytesToBinaryString(bytes) {
   return str
 }
 function b64urlEncode(bytes) {
-  return btoa(bytesToBinaryString(bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+  return btoa(bytesToBinaryString(bytes))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '')
 }
-function b64urlDecodeToString(b64url) {
+  
+}
+function b64urlDecodeToString(b64url) 
   const b64 = b64url.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(b64url.length / 4) * 4, '=')
   return atob(b64)
 }
@@ -134,7 +139,7 @@ async function sendKycEmail(env, fields, files) {
     return
   }
 
-  if (env.RESEND_API_KEY) {
+   {
     const attachments = []
     for (const f of files) {
       const buf = await f.blob.arrayBuffer()
@@ -192,6 +197,7 @@ async function handleKyc(request, env) {
   const fields = {
     legalEntityName: oneLine(form.get('legalEntityName')),
     tradingName: oneLine(form.get('tradingName')),
+    ownershipControl: (form.get('ownershipControl') || '').toString().slice(0, 3000),
     registrationNumber: oneLine(form.get('registrationNumber')),
     incorporationCountry: oneLine(form.get('incorporationCountry')),
     registeredAddress: oneLine(form.get('registeredAddress')),
