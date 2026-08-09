@@ -677,6 +677,178 @@ if (
     requests: result.results || [],
   })
 }
+if (
+  url.pathname.startsWith('/api/admin/access-requests/') &&
+  url.pathname.endsWith('/approve') &&
+  request.method === 'POST'
+) {
+  const suppliedSecret =
+    request.headers.get('X-Admin-Secret') || ''
+
+  if (
+    !env.ADMIN_SECRET ||
+    suppliedSecret !== env.ADMIN_SECRET
+  ) {
+    return json(
+      {
+        ok: false,
+        error: 'unauthorized',
+      },
+      401,
+    )
+  }
+
+  const requestId = url.pathname
+    .split('/')[4]
+
+  if (!requestId) {
+    return json(
+      {
+        ok: false,
+        error: 'missing request id',
+      },
+      400,
+    )
+  }
+
+  const accessRequest =
+    await env.DB.prepare(
+      `SELECT
+        id,
+        applicant_name,
+        organisation,
+        email,
+        status
+       FROM access_requests
+       WHERE id = ?
+       LIMIT 1`,
+    )
+      .bind(requestId)
+      .first()
+
+  if (!accessRequest) {
+    return json(
+      {
+        ok: false,
+        error: 'request not found',
+      },
+      404,
+    )
+  }
+
+  if (accessRequest.status !== 'pending') {
+    return json(
+      {
+        ok: false,
+        error: 'request is not pending',
+      },
+      409,
+    )
+  }
+
+  const now = Date.now()
+  const expiresAt =
+    now + 14 * 24 * 60 * 60 * 1000
+
+  const payloadB64 =
+    b64urlEncode(
+      new TextEncoder().encode(
+        JSON.stringify({
+          exp: expiresAt,
+        }),
+      ),
+    )
+
+  const signature =
+    await hmacSign(
+      payloadB64,
+      env.ACCESS_TOKEN_SECRET,
+    )
+
+  const token =
+    `${payloadB64}.${signature}`
+
+  const accessLink =
+    `https://armtrex.co.uk/products?access=${token}`
+
+  const reviewedAt =
+    new Date(now).toISOString()
+
+  const reviewedBy =
+    request.headers.get(
+      'X-Admin-Reviewer',
+    ) || 'admin'
+
+  try {
+    await env.DB.prepare(
+      `UPDATE access_requests
+       SET
+         status = ?,
+         reviewed_at = ?,
+         reviewed_by = ?,
+         access_expires_at = ?
+       WHERE id = ?`,
+    )
+      .bind(
+        'approved',
+        reviewedAt,
+        reviewedBy,
+        new Date(expiresAt).toISOString(),
+        requestId,
+      )
+      .run()
+
+    await env.DB.prepare(
+      `INSERT INTO access_audit_log
+       (
+         id,
+         access_request_id,
+         event_type,
+         event_detail,
+         performed_by,
+         created_at
+       )
+       VALUES (?, ?, ?, ?, ?, ?)`,
+    )
+      .bind(
+        crypto.randomUUID(),
+        requestId,
+        'request_approved',
+        'Stage 1 access request approved',
+        reviewedBy,
+        reviewedAt,
+      )
+      .run()
+  } catch (error) {
+    console.error(
+      'Access request approval failed:',
+      error.message,
+    )
+
+    return json(
+      {
+        ok: false,
+        error: 'approval could not be recorded',
+      },
+      500,
+    )
+  }
+
+  return json({
+    ok: true,
+    requestId,
+    status: 'approved',
+    applicantName:
+      accessRequest.applicant_name,
+    organisation:
+      accessRequest.organisation,
+    email:
+      accessRequest.email,
+    accessLink,
+    expiresAt:
+      new Date(expiresAt).toISOString(),
+  })
+}
     if (
       url.pathname === '/api/contact' &&
       request.method === 'POST'
