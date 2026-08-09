@@ -635,7 +635,48 @@ export default {
         categories,
       })
     }
+if (
+  url.pathname === '/api/admin/access-requests' &&
+  request.method === 'GET'
+) {
+  const suppliedSecret =
+    request.headers.get('X-Admin-Secret') || ''
 
+  if (
+    !env.ADMIN_SECRET ||
+    suppliedSecret !== env.ADMIN_SECRET
+  ) {
+    return json(
+      {
+        ok: false,
+        error: 'unauthorized',
+      },
+      401,
+    )
+  }
+
+  const result = await env.DB.prepare(
+    `SELECT
+      id,
+      applicant_name,
+      organisation,
+      email,
+      status,
+      submitted_at,
+      reviewed_at,
+      reviewed_by,
+      access_expires_at,
+      rejection_reason
+     FROM access_requests
+     ORDER BY submitted_at DESC
+     LIMIT 100`,
+  ).all()
+
+  return json({
+    ok: true,
+    requests: result.results || [],
+  })
+}
     if (
       url.pathname === '/api/contact' &&
       request.method === 'POST'
