@@ -671,6 +671,8 @@ async function handleContact(request, env) {
 const requestId = crypto.randomUUID()
 const submittedAt = new Date().toISOString()
 
+console.log('KYC DATABASE BLOCK REACHED', requestId)
+
 try {
   await env.DB.prepare(
     `INSERT INTO access_requests
