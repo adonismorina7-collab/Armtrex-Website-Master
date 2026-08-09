@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { useT } from '../i18n/ui.js'
+import { useT } from '../i18n/ui.js' 
+import logo from '../assets/armtrex-website-logo-master.png'
 
 const links = [
   { to: '/', key: 'nav.home', end: true },
@@ -55,9 +56,14 @@ return (
           onClick={() => setOpen(false)}
           aria-label={t('brand.homeAria')}
         >
+          <img
+          src={logo}
+          alt="Armtrex Ltd"
+          className="brand-logo"
+          />
           <span className="brand-name">Armtrex Ltd</span>
           <span className="brand-reg">
-            {t('footer.regNo')} 16573545
+          {t('footer.regNo')} 16573545
           </span>
         </Link>
 
