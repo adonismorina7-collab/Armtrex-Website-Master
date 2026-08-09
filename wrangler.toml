@@ -6,6 +6,10 @@ compatibility_date = "2025-01-01"
 directory = "./dist"
 binding = "ASSETS"
 not_found_handling = "single-page-application"
+[[d1_databases]]
+binding = "DB"
+database_name = "armtrex-access"
+database_id = "40e4927b-a02d-449d-8e53-217b40f72217"
 
 # Secrets (never put these here — set with `wrangler secret put <NAME>`):
 #
