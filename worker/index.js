@@ -679,7 +679,10 @@ if (
 }
 if (
   url.pathname.startsWith('/api/admin/access-requests/') &&
-  url.pathname.endsWith('/approve') &&
+  (
+    url.pathname.endsWith('/approve') ||
+    url.pathname.endsWith('/reject')
+  ) &&
   request.method === 'POST'
 ) {
   const suppliedSecret =
@@ -747,6 +750,109 @@ if (
   }
 
   const now = Date.now()
+    if (url.pathname.endsWith('/reject')) {
+    let data = {}
+
+    try {
+      data = await request.json()
+    } catch {
+      data = {}
+    }
+
+    const rejectionReason =
+      (data.reason || '')
+        .toString()
+        .trim()
+        .slice(0, 1000)
+
+    if (!rejectionReason) {
+      return json(
+        {
+          ok: false,
+          error: 'rejection reason is required',
+        },
+        400,
+      )
+    }
+
+    const reviewedAt =
+      new Date().toISOString()
+
+    const reviewedBy =
+      request.headers.get(
+        'X-Admin-Reviewer',
+      ) || 'admin'
+
+    try {
+      await env.DB.prepare(
+        `UPDATE access_requests
+         SET
+           status = ?,
+           reviewed_at = ?,
+           reviewed_by = ?,
+           rejection_reason = ?
+         WHERE id = ?`,
+      )
+        .bind(
+          'rejected',
+          reviewedAt,
+          reviewedBy,
+          rejectionReason,
+          requestId,
+        )
+        .run()
+
+      await env.DB.prepare(
+        `INSERT INTO access_audit_log
+         (
+           id,
+           access_request_id,
+           event_type,
+           event_detail,
+           performed_by,
+           created_at
+         )
+         VALUES (?, ?, ?, ?, ?, ?)`,
+      )
+        .bind(
+          crypto.randomUUID(),
+          requestId,
+          'request_rejected',
+          `Stage 1 access request rejected: ${rejectionReason}`,
+          reviewedBy,
+          reviewedAt,
+        )
+        .run()
+    } catch (error) {
+      console.error(
+        'Access request rejection failed:',
+        error.message,
+      )
+
+      return json(
+        {
+          ok: false,
+          error: 'rejection could not be recorded',
+        },
+        500,
+      )
+    }
+
+    return json({
+      ok: true,
+      requestId,
+      status: 'rejected',
+      applicantName:
+        accessRequest.applicant_name,
+      organisation:
+        accessRequest.organisation,
+      email:
+        accessRequest.email,
+      rejectionReason,
+      reviewedAt,
+    })
+  }
+
   const expiresAt =
     now + 14 * 24 * 60 * 60 * 1000
 
