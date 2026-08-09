@@ -675,12 +675,11 @@ async function handleContact(request, env) {
   return handleContact(request, env)
 }
 
-if (url.pathname === '/api/kyc' && request.method === 'POST') {
-  return handleKyc(request, env)
-}
+    if (url.pathname === '/api/kyc' && request.method === 'POST') {
+      return handleKyc(request, env)
     }
 
-    // Static Vite site.
+    // Everything else: static site.
     return env.ASSETS.fetch(request)
   },
 }
