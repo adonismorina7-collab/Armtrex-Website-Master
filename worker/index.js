@@ -69,7 +69,7 @@ function b64urlEncode(bytes) {
     .replace(/=+$/, '')
 }
   
-function b64urlDecodeToString(b64url) 
+function b64urlDecodeToString(b64url) {
   const b64 = b64url.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(b64url.length / 4) * 4, '=')
   return atob(b64)
 }

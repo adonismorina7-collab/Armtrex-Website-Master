@@ -24,7 +24,6 @@ export default function Kyc() {
 
           <div className="compliance-grid">
             <article className="compliance-card">
-              <span className="compliance-number">01</span>
               <h2>Governance &amp; Accountability</h2>
               <p>
                 Armtrex applies defined responsibility for compliance,
@@ -40,7 +39,6 @@ export default function Kyc() {
             </article>
 
             <article className="compliance-card">
-              <span className="compliance-number">02</span>
               <h2>Controlled Decision-Making</h2>
               <p>
                 Compliance decisions are made on a transaction-by-transaction
@@ -56,7 +54,6 @@ export default function Kyc() {
             </article>
 
             <article className="compliance-card">
-              <span className="compliance-number">03</span>
               <h2>Evidence &amp; Oversight</h2>
               <p>
                 Relevant compliance reviews, supporting documentation and
