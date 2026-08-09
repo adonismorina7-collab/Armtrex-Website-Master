@@ -529,7 +529,55 @@ async function handleKyc(request, env) {
     )
   }
 
-  return json({ ok: true })
+const requestId = crypto.randomUUID()
+const submittedAt = new Date().toISOString()
+
+try {
+  await env.DB.prepare(
+    `INSERT INTO access_requests
+      (id, applicant_name, organisation, email, status, submitted_at, request_data)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+  )
+    .bind(
+      requestId,
+      fields.contactName,
+      fields.legalEntityName,
+      fields.contactEmail,
+      'pending',
+      submittedAt,
+      JSON.stringify(fields),
+    )
+    .run()
+
+  await env.DB.prepare(
+    `INSERT INTO access_audit_log
+      (id, access_request_id, event_type, event_detail, created_at)
+     VALUES (?, ?, ?, ?, ?)`,
+  )
+    .bind(
+      crypto.randomUUID(),
+      requestId,
+      'request_submitted',
+      'Stage 1 access request submitted',
+      submittedAt,
+    )
+    .run()
+} catch (error) {
+  console.error(
+    'Access request database save failed:',
+    error.message,
+  )
+
+  return json(
+    {
+      ok: false,
+      error: 'request could not be recorded',
+    },
+    500,
+  )
+}
+
+return json({ ok: true })
 }
 
 // -----------------------------------------------------------------------------
