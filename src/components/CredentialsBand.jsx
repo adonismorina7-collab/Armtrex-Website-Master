@@ -10,7 +10,7 @@ const ICONS = {
   regulatory: (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M12 3v18M7 7l-4 8a4 4 0 0 0 8 0L7 7ZM17 7l-4 8a4 4 0 0 0 8 0l-4-8ZM4 21h16M12 3l-5 2M12 3l5 2"
-            stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
   governance: (
@@ -34,8 +34,22 @@ export default function CredentialsBand() {
             <div className="credential-icon" aria-hidden="true">
               {ICONS[item.kind] || ICONS.certification}
             </div>
+
             <span className="credential-label">{item.label}</span>
             <p className="credential-value">{item.value}</p>
+
+            {item.kind === 'certification' && (
+              <div className="credential-certificate">
+                <iframe
+                 src="https://registry.blockmarktech.com/certificates/713c8b3f-e2f8-4735-ad81-261a6b3a2828/widget/?tooltip_position=bottom&theme=transparent"
+                 title="Cyber Essentials Plus certificate verification"
+                 loading="lazy"
+                 className="credential-certificate-frame"
+                 width="180"
+                 height="180"
+                />
+              </div>
+            )}
           </article>
         ))}
       </div>
