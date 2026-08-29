@@ -565,22 +565,31 @@ p {
   text-align: justify;
   hyphens: auto;
 }
+
+.brief-body p {
+  margin: 0 0 0.9rem;
+}
+
+.brief-body p:last-child {
+  margin-bottom: 0;
+}
 .brief-body p:first-child {
   color: var(--text);
   font-size: 1.15rem;
+  margin-bottom: 0.9rem;
 }
 .brief-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-top: 2.5rem;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
 }
 .brief-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-left: 3px solid var(--accent);
   border-radius: var(--radius);
-  padding: 1.75rem;
+  padding: 1.5rem;
 }
 .brief-card h3 {
   font-size: 1.1rem;
@@ -842,7 +851,7 @@ p {
 .credential-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   text-align: left;
 }
 .credential-icon {
@@ -2526,5 +2535,36 @@ p {
     border-left: 3px solid var(--accent);
     padding: 0.85rem 1rem;
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+}
+.credential-certificate {
+  margin-top: 1rem;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.credential-certificate-frame {
+  display: block;
+  width: 120px;
+  height: 120px;
+  max-width: 100%;
+  border: 0;
+  background: transparent;
+}
+
+@media (max-width: 640px) {
+  .credential-certificate {
+    margin-top: 0.75rem;
+    width: 120px;
+    height: 120px;
+  }
+
+  .credential-certificate-frame {
+    width: 120px;
+    height: 120px;
   }
 }
