@@ -983,7 +983,7 @@ async function handleContact(request, env) {
       .trim()
       .slice(0, max)
 
-  // Honeypot â€” genuine visitors should leave this empty.
+  // Honeypot ÔÇö genuine visitors should leave this empty.
   if (clean(data._gotcha, 200)) {
     return json({ ok: true })
   }

@@ -19,7 +19,7 @@ export const company = {
     'To provide reliable, modern, and compliant defence procurement solutions supporting national security, allied defence cooperation, industrial development, and strategic defence capabilities.',
 
   vision:
-    'To establish Armtrex Ltd as a reliable regional defence procurement and industrial partner recognized for supply chain integrity, operational reliability, compliance standards, and long-term support of governmental and authorized defence-sector requirements.',
+    'To establish Armtrex as a reliable regional defence procurement and industrial partner recognized for supply chain integrity, operational reliability, compliance standards, and long-term support of governmental and authorized defence-sector requirements.',
 
   compliance: [
     'Armtrex applies a controlled, risk-based approach to defence and security procurement. Enquiries, catalogue requests, quotations and commercial discussions do not constitute authorisation to supply or transfer controlled goods, software or technology.',
@@ -75,7 +75,7 @@ credentials: [
   {
     kind: 'certification',
     label: 'Certification',
-    value: 'Cyber Essentials Plus — In Progress',
+    value: 'Cyber Essentials Plus',
   },
   {
     kind: 'regulatory',
