@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import HeroSlider from '../components/HeroSlider.jsx'
 import CompanyBrief from '../components/CompanyBrief.jsx'
-import FactoryStripe from '../components/FactoryStripe.jsx'
 import CredentialsBand from '../components/CredentialsBand.jsx'
 import AddressSection from '../components/AddressSection.jsx'
 import { useCompany } from '../i18n/content.js'
@@ -22,7 +21,6 @@ export default function Home() {
   return (
     <>
       <HeroSlider />
-      <FactoryStripe />
       <CompanyBrief />
 
       <section className="section capabilities" aria-labelledby="cap-heading">
@@ -77,7 +75,7 @@ export default function Home() {
           {company.certifications?.length > 0 && (
             <p className="compliance-cert">
               <span className="compliance-cert-label">{t('cred.certification')}:</span>{' '}
-              {company.certifications.join(' · ')}
+              {company.certifications.join(' Â· ')}
             </p>
           )}
         </div>
@@ -89,3 +87,4 @@ export default function Home() {
     </>
   )
 }
+

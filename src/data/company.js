@@ -11,7 +11,7 @@ export const company = {
     'Official seller of defence and ordnance products for governmental and authorized defence-sector requirements.',
 
   brief: [
-    'Armtrex Ltd is the official announced seller of defence and ordnance products manufactured at a newly built, state-of-the-art production facility. We specialize in the international supply of the most up-to-date military design products, including advanced ammunition systems, weapons, energetic materials, and integrated security solutions.',
+    'ARMTREX Ltd is a defence and ordnance procurement and trading company with extensive experience in meeting international defence procurement requirements. We specialise in sourcing and supplying a broad range of defence-related products, including advanced ammunition systems, weapons, energetic materials, and integrated security solutions. Drawing on our industry expertise and established global network, we support the evolving procurement requirements of defence, security, and government-sector clients.',
     'Our focus is providing professional procurement support to governmental, military, industrial, and strategic defence-sector requirements through our official distribution arrangement capabilities.',
   ],
 
