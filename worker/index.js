@@ -606,6 +606,48 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url)
 
+    // TEMPORARY PUBLIC HOLDING PAGE — remove this block for the Monday launch.
+    // API routes remain available; all public website paths show the holding page.
+    if (!url.pathname.startsWith('/api/')) {
+      const html = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101820">
+  <title>Armtrex | Coming Soon</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 32px 20px; background: #101820; color: #f7f8fa; font-family: Arial, Helvetica, sans-serif; text-align: center; }
+    main { width: 100%; max-width: 680px; }
+    .brand { margin: 0 0 54px; font-size: 19px; font-weight: 700; letter-spacing: .22em; }
+    .rule { width: 48px; height: 3px; margin: 0 auto 30px; background: #c7a66a; }
+    h1 { margin: 0 0 20px; font-size: clamp(38px, 8vw, 64px); line-height: 1.05; letter-spacing: -.035em; }
+    p { margin: 0 auto; max-width: 520px; color: #c5cbd1; font-size: 18px; line-height: 1.7; }
+    .contact { margin-top: 42px; font-size: 14px; }
+    a { color: #d8bd8b; text-decoration: none; }
+    footer { margin-top: 76px; color: #87919a; font-size: 12px; letter-spacing: .08em; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">ARMTREX</div>
+    <div class="rule"></div>
+    <h1>Something exceptional is coming.</h1>
+    <p>We’re putting the finishing touches in place. Our website will be launching soon. Thank you for your patience.</p>
+    <p class="contact">For enquiries, please contact <a href="mailto:info@armtrex.co.uk">info@armtrex.co.uk</a>.</p>
+    <footer>ARMTREX&nbsp; · &nbsp;COMING SOON</footer>
+  </main>
+</body>
+</html>`
+      return new Response(request.method === 'HEAD' ? null : html, {
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'no-store, no-cache, must-revalidate'
+        }
+      })
+    }
+
     if (
       url.pathname === '/api/access/verify' &&
       request.method === 'GET'
