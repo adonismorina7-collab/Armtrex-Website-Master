@@ -29,6 +29,17 @@ export default function CompanyBrief() {
             <p>{company.vision}</p>
           </article>
         </div>
+
+        <div className="corporate-identifiers">
+          <span className="corporate-identifiers-label">
+            Corporate Identifiers
+          </span>
+          <div className="corporate-identifiers-values">
+            <span><strong>D-U-N-S:</strong> 2339655548</span>
+            <span><strong>NCAGE:</strong> U2JR1</span>
+            <span><strong>PPON:</strong> PZZY-1786-LGDV</span>
+          </div>
+        </div>
       </div>
     </section>
   )

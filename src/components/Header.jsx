@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { useT } from '../i18n/ui.js'
-import logo from '../assets/armtrex-website-logo-master.png'
+import logo from '../assets/armtrex-logo-refined-transparent.png'
 
 const links = [
   { to: '/', key: 'nav.home', end: true },
