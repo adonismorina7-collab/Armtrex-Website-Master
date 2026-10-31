@@ -25,7 +25,7 @@ export const products = [
     highlights: [
       { label: 'Caliber', value: '155 mm' },
       { label: 'Explosive filling', value: 'TNT/Comp-B' },
-      { label: 'Muzzle velocity, V0', value: '925 ± 15 m/s' },
+      { label: 'Muzzle velocity, V0', value: '934 ± 10 m/s' },
       { label: 'Max range', value: '~42 000 m (L/52)' },
     ],
     specs: [
@@ -53,7 +53,7 @@ export const products = [
     highlights: [
       { label: 'Caliber', value: '155 mm' },
       { label: 'Explosive filling', value: 'TNT/Comp-B' },
-      { label: 'Muzzle velocity, V0', value: '925 ± 15 m/s' },
+      { label: 'Muzzle velocity, V0', value: '934 ± 10 m/s' },
       { label: 'Max range', value: '~32 000 m (L/52)' },
     ],
     specs: [
@@ -63,7 +63,7 @@ export const products = [
       { label: 'Weight without fuze', value: '~43 – 45.6 kg' },
       { label: 'Explosive filling', value: 'TNT/Comp-B' },
       { label: 'Weight of explosive filling', value: '~8.7 kg' },
-      { label: 'Muzzle velocity, V0', value: '925 ± 15 m/s' },
+      { label: 'Muzzle velocity, V0', value: '934 ± 10 m/s' },
       { label: 'Maximum range', value: '~32 000 m' },
       { label: 'Fuze', value: 'PD M557 or equivalent' },
       { label: 'Operating temperature', value: '-50°C / +60°C' },
@@ -81,7 +81,7 @@ export const products = [
     highlights: [
       { label: 'Caliber', value: '155 mm' },
       { label: 'Explosive filling', value: 'TNT/Comp-B' },
-      { label: 'Muzzle velocity, V0', value: '925 ± 15 m/s' },
+      { label: 'Muzzle velocity, V0', value: '934 ± 10 m/s' },
       { label: 'Max range', value: '~39 000 m (L/52)' },
     ],
     specs: [
@@ -91,7 +91,7 @@ export const products = [
       { label: 'Weight without fuze', value: '~36.30 ± 0.35 kg' },
       { label: 'Explosive filling', value: 'TNT/Comp-B' },
       { label: 'Weight of explosive filling', value: '~9.6 kg' },
-      { label: 'Muzzle velocity, V0', value: '925 ± 15 m/s' },
+      { label: 'Muzzle velocity, V0', value: '934 ± 10 m/s' },
       { label: 'Maximum range', value: '~39 000 m' },
       { label: 'Fuze', value: 'PD M557 or equivalent' },
       { label: 'Operating temperature', value: '-50°C / +60°C' },
@@ -109,7 +109,7 @@ export const products = [
     highlights: [
       { label: 'Caliber', value: '155 mm' },
       { label: 'Explosive filling', value: 'TNT/Comp-B' },
-      { label: 'Muzzle velocity, V0', value: '925 ± 15 m/s' },
+      { label: 'Muzzle velocity, V0', value: '934 ± 10 m/s' },
       { label: 'Max range', value: '~30 000 m (L/52)' },
     ],
     specs: [
@@ -119,7 +119,7 @@ export const products = [
       { label: 'Weight without fuze', value: '~34.57 ± 0.5 kg' },
       { label: 'Explosive filling', value: 'TNT/Comp-B' },
       { label: 'Weight of explosive filling', value: '~9.6 kg' },
-      { label: 'Muzzle velocity, V0', value: '925 ± 15 m/s' },
+      { label: 'Muzzle velocity, V0', value: '934 ± 10 m/s' },
       { label: 'Maximum range', value: '~30 000 m' },
       { label: 'Fuze', value: 'PD M557 or equivalent' },
       { label: 'Operating temperature', value: '-50°C / +60°C' },
