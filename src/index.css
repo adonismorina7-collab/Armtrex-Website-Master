@@ -2897,3 +2897,12 @@ p {
   color: var(--text);
   font-weight: 600;
 }
+
+/* Tighten spacing between Company Profile and Capabilities */
+.company-brief {
+  padding-bottom: 2rem;
+}
+
+.capabilities {
+  padding-top: 2rem;
+}

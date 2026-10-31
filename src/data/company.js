@@ -80,7 +80,7 @@ credentials: [
   {
     kind: 'regulatory',
     label: 'Regulatory',
-    value: 'OITCL — In Progress',
+    value: 'OITCL Application - In Progress',
   },
   {
     kind: 'governance',
