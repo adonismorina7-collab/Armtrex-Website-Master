@@ -9,68 +9,131 @@ export default function ProductDetail() {
   const categories = useCategories()
   const t = useT()
 
-  const catName = Object.fromEntries(categories.map((c) => [c.id, c.name]))
-  const product = products.find((p) => p.slug === slug)
+  const catName = Object.fromEntries(
+    categories.map((category) => [category.id, category.name])
+  )
+
+  const product = products.find((item) => item.slug === slug)
 
   if (!product) {
     return <Navigate to="/products" replace />
   }
 
-  const { name, subtitle, category, image, description, highlights, systems } = product
-  // With a subtitle, the full name stays on line 1 and the subtitle is line 2;
-  // otherwise a trailing "(...)" in the name becomes the second line.
-  const split = splitProductName(name)
-  const main = subtitle ? name : split.main
-  const sub = subtitle ? subtitle : split.sub
+  const {
+    name,
+    subtitle,
+    category,
+    image,
+    description,
+    highlights,
+    systems,
+  } = product
 
-  // Canonicalise: the category segment must match the product's own
-  // category (e.g. an old or hand-edited /products/<wrong>/<slug> link).
+  // Canonicalise the category URL so every product has one clean URL.
   if (catId !== category) {
     return <Navigate to={`/products/${category}/${slug}`} replace />
   }
 
+  // Products with an explicit subtitle keep the complete product name
+  // on the first line. Products without one use the existing name splitter.
+  const split = splitProductName(name)
+  const main = subtitle ? name : split.main
+  const sub = subtitle ? subtitle : split.sub
+
   return (
     <section className="section product-detail-section">
       <div className="container">
-        <nav className="breadcrumb" aria-label={t('detail.breadcrumb')}>
-          <Link to="/products">{t('nav.products')}</Link>
-          <span aria-hidden="true" className="breadcrumb-sep">›</span>
-          <Link to={`/products/${category}`}>{catName[category]}</Link>
-          <span aria-hidden="true" className="breadcrumb-sep">›</span>
-          <span aria-current="page">{split.sub ? `${split.main} — ${split.sub}` : split.main}</span>
+
+        <nav
+          className="breadcrumb"
+          aria-label={t('detail.breadcrumb')}
+        >
+          <Link to="/products">
+            {t('nav.products')}
+          </Link>
+
+          <span
+            aria-hidden="true"
+            className="breadcrumb-sep"
+          >
+            ›
+          </span>
+
+          <Link to={`/products/${category}`}>
+            {catName[category]}
+          </Link>
+
+          <span
+            aria-hidden="true"
+            className="breadcrumb-sep"
+          >
+            ›
+          </span>
+
+          <span aria-current="page">
+            {sub ? `${main} — ${sub}` : main}
+          </span>
         </nav>
 
         <article className="product-detail">
-          <div className={`product-detail-media ${image ? '' : 'is-empty'}`}>
+
+          <div
+            className={`product-detail-media ${
+              image ? '' : 'is-empty'
+            }`}
+          >
             {image ? (
-              <img src={image} alt={name} decoding="async" />
+              <img
+                src={image}
+                alt={name}
+                decoding="async"
+              />
             ) : (
-              <div className="product-media-fallback" aria-hidden="true">
-                <span>No product image available</span>
+              <div
+                className="product-media-fallback"
+                aria-hidden="true"
+              >
+                <span>
+                  No product image available
+                </span>
               </div>
             )}
           </div>
 
           <div className="product-detail-body">
-            <span className="product-detail-cat">{catName[category]}</span>
+
+            <span className="product-detail-cat">
+              {catName[category]}
+            </span>
+
             <h1 className="product-detail-name">
               {main}
-              {sub && <span className="product-detail-name-sub">{sub}</span>}
+
+              {sub && (
+                <span className="product-detail-name-sub">
+                  {sub}
+                </span>
+              )}
             </h1>
 
             {highlights?.length > 0 && (
               <dl className="product-highlights">
-                {highlights.map((h) => (
-                  <div className="highlight" key={h.label}>
-                    <dt>{h.label}</dt>
-                    <dd>{h.value}</dd>
+                {highlights.map((highlight) => (
+                  <div
+                    className="highlight"
+                    key={highlight.label}
+                  >
+                    <dt>{highlight.label}</dt>
+                    <dd>{highlight.value}</dd>
                   </div>
                 ))}
               </dl>
             )}
 
             {description ? (
-              <p className="product-detail-desc">{description}</p>
+              <p className="product-detail-desc">
+                {description}
+              </p>
             ) : (
               <p className="product-detail-desc product-desc-missing">
                 {t('detail.noDesc')}
@@ -79,18 +142,29 @@ export default function ProductDetail() {
 
             {systems && (
               <p className="product-systems">
-                <span className="product-systems-label">{t('detail.systems')}</span>
+                <span className="product-systems-label">
+                  {t('detail.systems')}
+                </span>{' '}
                 {systems}
               </p>
             )}
 
             <div className="product-detail-actions">
-              <Link to="/products" className="btn btn-ghost">
+
+              <Link
+                to="/products"
+                className="btn btn-ghost"
+              >
                 {t('detail.back')}
               </Link>
-              <Link to={`/contact?product=${slug}`} className="btn btn-primary">
+
+              <Link
+                to={`/kyc?product=${encodeURIComponent(slug)}`}
+                className="btn btn-primary"
+              >
                 {t('detail.enquire')}
               </Link>
+
             </div>
           </div>
         </article>

@@ -17,9 +17,9 @@ export default function Footer() {
       <div className="container footer-inner">
 
         <div className="footer-brand">
-          <strong>{company.legalName}</strong>
+          <strong className="footer-legal">{company.legalName}</strong>
 
-          <span>
+          <span className="footer-reg">
             {t('footer.regNo')} {company.registrationNumber}
           </span>
 
@@ -61,7 +61,7 @@ export default function Footer() {
       <div className="footer-bar">
         <div className="container">
           <p>
-            © {year} {company.legalName}. {t('footer.rights')}
+            Â© {year} {company.legalName}. {t('footer.rights')}
           </p>
         </div>
       </div>

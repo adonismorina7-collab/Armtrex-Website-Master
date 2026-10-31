@@ -75,7 +75,7 @@ const dict = {
     'footer.web': 'Web: ',
     'footer.rights': 'All rights reserved.',
     'footer.compliance':
-      'Defence-related and dual-use enquiries are subject to applicable export-control, sanctions, end-use, destination and due-diligence requirements. No enquiry or catalogue request constitutes approval or authorisation to supply.',
+      'Defence-related and dual-use enquiries are subject to applicable export-control, sanctions, end-use, destination and due-diligence requirements. No enquiry or technical-specification request constitutes approval or authorisation to supply.',
 
     'products.kicker': 'Product Portfolio',
     'products.heading': 'Products',

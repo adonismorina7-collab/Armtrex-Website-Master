@@ -376,8 +376,14 @@ async function handleKyc(request, env) {
       .slice(0, 2000)
 
   const fields = {
-    legalEntityName:
-      oneLine(form.get('legalEntityName')),
+    selectedProduct:
+  oneLine(form.get('selectedProduct')),
+
+selectedProductSlug:
+  oneLine(form.get('selectedProductSlug')),
+
+legalEntityName:
+  oneLine(form.get('legalEntityName')),
 
     tradingName:
       oneLine(form.get('tradingName')),
@@ -499,13 +505,25 @@ async function handleKyc(request, env) {
     )
   }
 
-  const emailText = [
-    'New Armtrex Stage 1 buyer/supplier enquiry',
-    '----------------------------------------',
-    ...Object.entries(fields).map(
+ const emailText = [
+  'New Armtrex Stage 1 buyer/supplier enquiry',
+  '----------------------------------------',
+  '',
+  `Product Enquired About: ${fields.selectedProduct || 'Not specified'}`,
+  `Product Reference: ${fields.selectedProductSlug || 'Not specified'}`,
+  '',
+  'KYC / Counterparty Information',
+  '----------------------------------------',
+  ...Object.entries(fields)
+    .filter(
+      ([key]) =>
+        key !== 'selectedProduct' &&
+        key !== 'selectedProductSlug',
+    )
+    .map(
       ([key, value]) => `${key}: ${value}`,
     ),
-  ].join('\n')
+].join('\n')
 
   try {
     await sendEmail(env, {
@@ -983,7 +1001,7 @@ async function handleContact(request, env) {
       .trim()
       .slice(0, max)
 
-  // Honeypot ÔÇö genuine visitors should leave this empty.
+  // Honeypot ï¿½ï¿½ï¿½ genuine visitors should leave this empty.
   if (clean(data._gotcha, 200)) {
     return json({ ok: true })
   }

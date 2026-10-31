@@ -1,5 +1,5 @@
 // Product catalog. Every field is transcribed from the local datasheet PDFs in:
-//   "Artillery Ammunitioin/", "Mortar Ammuition/", "Unguided Rockets/", "Propellant Charges/"
+// "Artillery Ammunitioin/", "Mortar Ammuition/", "Unguided Rockets/", "Propellant Charges/"
 // Descriptions and specifications are taken verbatim from those sheets.
 // No values are invented. Product images are extracted from the datasheet
 // artwork (transparent, via the embedded soft masks).

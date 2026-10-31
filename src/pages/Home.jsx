@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import HeroSlider from '../components/HeroSlider.jsx'
 import CompanyBrief from '../components/CompanyBrief.jsx'
 import CredentialsBand from '../components/CredentialsBand.jsx'
@@ -75,7 +75,7 @@ export default function Home() {
           {company.certifications?.length > 0 && (
             <p className="compliance-cert">
               <span className="compliance-cert-label">{t('cred.certification')}:</span>{' '}
-              {company.certifications.join(' Â· ')}
+              {company.certifications.join(' · ')}
             </p>
           )}
         </div>

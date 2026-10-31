@@ -1,20 +1,20 @@
 import { useState, useEffect, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { useT } from '../i18n/ui.js' 
+import { useT } from '../i18n/ui.js'
 import logo from '../assets/armtrex-website-logo-master.png'
 
 const links = [
   { to: '/', key: 'nav.home', end: true },
   { to: '/products', key: 'nav.products' },
-  { to: '/kyc', key: 'nav.kyc' },
   { to: '/contact', key: 'nav.contact' },
-] 
+]
+
 export default function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const t = useT()
-  const toggleRef = useRef(null) 
-    
+  const toggleRef = useRef(null)
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
 
@@ -23,84 +23,81 @@ export default function Header() {
 
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
   useEffect(() => {
-  if (!open) return undefined
+    if (!open) return undefined
 
-  const onKey = (event) => {
-    if (event.key === 'Escape') {
-      setOpen(false)
-      toggleRef.current?.focus()
+    const onKey = (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+        toggleRef.current?.focus()
+      }
     }
-  }
 
-  document.addEventListener('keydown', onKey)
+    document.addEventListener('keydown', onKey)
 
-  return () => document.removeEventListener('keydown', onKey)
-}, [open])
+    return () => document.removeEventListener('keydown', onKey)
+  }, [open])
 
-return (
-  <>
-    {open && (
-      <div
-        className="nav-backdrop"
-        aria-hidden="true"
-        onClick={() => setOpen(false)}
-      />
-    )}
-
-    <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
-      <div className="container header-inner">
-        <Link
-          to="/"
-          className="brand"
+  return (
+    <>
+      {open && (
+        <div
+          className="nav-backdrop"
+          aria-hidden="true"
           onClick={() => setOpen(false)}
-          aria-label={t('brand.homeAria')}
-        >
-          <img
-          src={logo}
-          alt="Armtrex Ltd"
-          className="brand-logo"
-          />
-          <span className="brand-name">Armtrex Ltd</span>
-          <span className="brand-reg">
-          {t('footer.regNo')} 16573545
-          </span>
-        </Link>
+        />
+      )}
 
-        <button
-          ref={toggleRef}
-          className="nav-toggle"
-          aria-expanded={open}
-          aria-controls="primary-nav"
-          aria-label={t('nav.toggle')}
-          onClick={() => setOpen((value) => !value)}
-        >
-          <span className="nav-toggle-bar" />
-          <span className="nav-toggle-bar" />
-          <span className="nav-toggle-bar" />
-        </button>
+      <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
+        <div className="container header-inner">
+          <Link
+            to="/"
+            className="brand"
+            onClick={() => setOpen(false)}
+            aria-label={t('brand.homeAria')}
+          >
+            <img
+              src={logo}
+              alt="Armtrex"
+              className="brand-logo"
+            />
+          </Link>
 
-        <nav
-          id="primary-nav"
-          className={`primary-nav ${open ? 'is-open' : ''}`}
-          aria-label={t('nav.primary')}
-        >
-          {links.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.end}
-              className={({ isActive }) =>
-                isActive ? 'nav-link is-active' : 'nav-link'
-              }
-              onClick={() => setOpen(false)}
-            >
-              {t(link.key)}
-            </NavLink>
-          ))}
-        </nav>
-      </div>
-    </header>
-  </>
-)
+          <button
+            ref={toggleRef}
+            className="nav-toggle"
+            aria-expanded={open}
+            aria-controls="primary-nav"
+            aria-label={t('nav.toggle')}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span className="nav-toggle-bar" />
+            <span className="nav-toggle-bar" />
+            <span className="nav-toggle-bar" />
+          </button>
+
+          <nav
+            id="primary-nav"
+            className={`primary-nav ${open ? 'is-open' : ''}`}
+            aria-label={t('nav.primary')}
+          >
+            {links.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                end={link.end}
+                className={({ isActive }) =>
+                  isActive ? 'nav-link is-active' : 'nav-link'
+                }
+                onClick={() => setOpen(false)}
+              >
+                {t(link.key)}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+      </header>
+    </>
+  )
 }
