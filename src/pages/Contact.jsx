@@ -65,7 +65,7 @@ export default function Contact() {
 
             <p>
               Please provide sufficient information for us to understand
-              the nature of your enquiry. Product, commercial and catalogue
+              the nature of your enquiry. Product and commercial 
               enquiries may be subject to additional verification before
               further information or engagement is provided.
             </p>
@@ -121,7 +121,7 @@ export default function Contact() {
               <p>
                 Armtrex is interested in connecting with experienced
                 professionals who can contribute to our defence,
-                manufacturing, procurement, compliance and corporate
+                procurement, compliance and corporate
                 capabilities.
               </p>
               <span className="contact-channel-link">

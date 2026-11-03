@@ -452,6 +452,10 @@ p {
   line-height: 1.08;
   margin-bottom: 1rem;
 }
+.hero-title.hero-title-rocket {
+  font-size: clamp(2.415rem, 5.46vw, 3.15rem);
+  max-width: 680px;
+}
 /* Hero spec read-out — the hardware's numbers are the credential */
 .hero-stats {
   display: flex;
